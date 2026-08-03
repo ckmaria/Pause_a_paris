@@ -2,12 +2,13 @@
 
 <html lang="fr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- tes autres fichiers CSS -->
 
 <meta name="description" content="Pause à Paris — Restaurant, Boulangerie, Pâtisserie & Traiteur à Oujda. Le temps d'une pause, le goût s'impose.">
 <title>Pause à Paris | Restaurant & Boulangerie — Oujda</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
 :root{
   --v:#4a5e3a; --vf:#3a4d2c; --vl:#6b8a55; --vbg:#f0f4eb;
@@ -55,7 +56,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:1000;height:68px;padding:0 5%;di
 .bs:hover{background:var(--vl);transform:translateY(-2px)}
 .bg{background:transparent;color:var(--w);padding:12px 32px;font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;text-decoration:none;font-weight:400;border:1px solid rgba(250,250,246,.27);transition:all .3s;cursor:pointer;font-family:'DM Sans',sans-serif}
 .bg:hover{border-color:var(--or);color:var(--or);transform:translateY(-2px)}
-.hscr{position:absolute;bottom:28px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:6px;color:rgba(250,250,246,.3);font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;animation:fd .9s 1.2s both}
+.hscr{position:absolute;bottom:28px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:6px;color:rgba(250,250,246,.3);font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;animation:none}
 .hscrl{width:1px;height:42px;background:linear-gradient(to bottom,var(--or),transparent);animation:sp 2s ease-in-out infinite}
 @keyframes sp{0%,100%{opacity:.4}50%{opacity:.9}}
 
@@ -517,43 +518,271 @@ footer{background:#090909;color:rgba(250,250,246,.4);padding:40px 5% 28px;border
 
 .spec-card{
     background:#fff;
-    border-radius:18px;
-    padding:20px;
+    border-radius:22px;
+    padding:22px 30px;
+    margin-bottom:28px;
     text-align:center;
-    box-shadow:0 10px 25px rgba(0,0,0,.12);
-    transition:.3s;
-}
-
-.spec-card:hover{
-    transform:translateY(-8px);
-    box-shadow:0 18px 40px rgba(0,0,0,.18);
+    box-shadow:0 12px 35px rgba(0,0,0,.08);
 }
 
 .spec-card h3{
-    color:#556B3D;
-    font-size:1.3rem;
+    font-size:2rem;
+    color:var(--vf);
     margin-bottom:18px;
-    font-weight:700;
 }
 
 .spec-images{
     display:flex;
     justify-content:center;
-    gap:10px;
+    align-items:center;
+    gap:12px;
     flex-wrap:wrap;
+    margin-top:20px;
 }
 
 .spec-images img{
-    width:120px;
-    height:120px;
+    width:115px;
+    height:115px;
     object-fit:cover;
-    border-radius:15px;
-    box-shadow:0 6px 15px rgba(0,0,0,.15);
+    border-radius:14px;
+    cursor:pointer;
+    transition:transform .35s ease, box-shadow .35s ease;
+}
+-annonce{
+    margin-top:35px;
+    padding:28px 32px;
+    background:#f8fbf8;
+    border-left:5px solid var(--v);
+    border-radius:12px;
+    box-shadow:0 10px 30px rgba(0,0,0,.05);
+}
+
+.badge-new{
+    display:inline-block;
+    margin-bottom:12px;
+    font-size:.72rem;
+    letter-spacing:3px;
+    text-transform:uppercase;
+    color:var(--or);
+    font-weight:600;
+}
+
+.gluten-annonce{
+    margin-top:40px;
+    padding:35px;
+    background:linear-gradient(135deg,#fdfcf9,#f7f5ef);
+    border-left:6px solid var(--or);
+    border-radius:18px;
+    box-shadow:0 15px 35px rgba(0,0,0,.08);
+    transition:.35s ease;
+}
+
+.gluten-annonce:hover{
+    transform:translateY(-4px);
+    box-shadow:0 20px 45px rgba(0,0,0,.12);
+}
+
+.badge-new{
+    display:inline-block;
+    margin-bottom:16px;
+    padding:6px 14px;
+    background:rgba(201,166,75,.15);
+    color:var(--or);
+    border-radius:30px;
+    font-size:.72rem;
+    font-weight:700;
+    letter-spacing:2px;
+    text-transform:uppercase;
+}
+
+.gluten-annonce h3{
+    font-family:'Playfair Display',serif;
+    font-size:2rem;
+    font-weight:600;
+    color:var(--vf);
+    margin-bottom:18px;
+    line-height:1.2;
+}
+
+.gluten-annonce p{
+    font-size:1rem;
+    line-height:1.9;
+    color:#555;
+    margin-bottom:25px;
+}
+
+.btn-gluten{
+    display:inline-block;
+    padding:12px 24px;
+    background:var(--vf);
+    color:#fff;
+    text-decoration:none;
+    border-radius:50px;
+    font-weight:600;
     transition:.3s;
 }
 
-.spec-images img:hover{
-    transform:scale(1.08);
+.btn-gluten:hover{
+    background:var(--or);
+    color:#fff;
+}
+.badge-new{
+    display:inline-block;
+    margin-bottom:16px;
+    padding:6px 14px;
+    background:rgba(201,166,75,.15);
+    color:var(--or);
+    border-radius:30px;
+    font-size:.72rem;
+    font-weight:700;
+    letter-spacing:2px;
+    text-transform:uppercase;
+}
+
+.gluten-annonce h3{
+    font-family:'Playfair Display',serif;
+    font-size:2.3rem;
+    font-weight:600;
+    color:var(--vf);
+    margin-bottom:18px;
+    line-height:1.2;
+}
+
+.gluten-annonce p{
+    font-size:1.05rem;
+    line-height:1.9;
+    color:#5b5b5b;
+    margin-bottom:28px;
+}
+
+.gluten-annonce strong{
+    color:var(--vf);
+    font-weight:600;
+}
+
+.btn-gluten{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    padding:14px 28px;
+    background:var(--vf);
+    color:#fff;
+    text-decoration:none;
+    border-radius:50px;
+    font-size:.95rem;
+    font-weight:600;
+    transition:.35s;
+}
+
+.btn-gluten:hover{
+    background:var(--or);
+    color:#fff;
+    transform:translateY(-3px);
+    box-shadow:0 10px 25px rgba(202,166,75,.35);
+}
+
+/* Ligne décorative */
+.gluten-annonce::after{
+    content:"";
+    display:block;
+    width:90px;
+    height:3px;
+    background:var(--or);
+    border-radius:20px;
+    margin-top:25px;
+}
+
+/* ===== Lightbox local ===== */
+.lightbox-overlay{
+    position:fixed;
+    inset:0;
+    z-index:2000;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:24px;
+    background:rgba(11, 14, 11, .84);
+    backdrop-filter:blur(8px);
+    opacity:0;
+    visibility:hidden;
+    pointer-events:none;
+    transition:opacity .28s ease, visibility .28s ease;
+}
+.lightbox-overlay.is-open{
+    opacity:1;
+    visibility:visible;
+    pointer-events:auto;
+}
+.lightbox-stage{
+    position:relative;
+    max-width:min(78vw, 860px);
+    max-height:78vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    transform:scale(.94);
+    opacity:0;
+    transition:transform .28s ease, opacity .28s ease;
+}
+.lightbox-overlay.is-open .lightbox-stage{
+    transform:scale(1);
+    opacity:1;
+}
+.lightbox-stage img{
+    display:block;
+    max-width:100%;
+    max-height:78vh;
+    width:auto;
+    height:auto;
+    object-fit:contain;
+    border-radius:10px;
+    box-shadow:0 28px 70px rgba(0,0,0,.45);
+    background:#111;
+}
+.lightbox-stage img,
+.lightbox-close,
+.lightbox-arrow{
+    user-select:none;
+}
+.lightbox-close,
+.lightbox-arrow{
+    position:absolute;
+    border:none;
+    cursor:pointer;
+    color:#fff;
+    background:rgba(255,255,255,.13);
+    border:1px solid rgba(255,255,255,.24);
+    backdrop-filter:blur(6px);
+}
+.lightbox-close{
+    top:12px;
+    right:12px;
+    width:44px;
+    height:44px;
+    border-radius:50%;
+    font-size:1.6rem;
+    line-height:1;
+}
+.lightbox-arrow{
+    top:50%;
+    transform:translateY(-50%);
+    width:52px;
+    height:52px;
+    border-radius:50%;
+    font-size:1.45rem;
+}
+.lightbox-prev{left:16px}
+.lightbox-next{right:16px}
+.lightbox-close:hover,
+.lightbox-arrow:hover{background:rgba(201,164,74,.26)}
+
+@media(max-width:680px){
+    .lightbox-overlay{padding:16px}
+    .lightbox-stage{max-width:100%}
+    .lightbox-close{top:8px;right:8px;width:40px;height:40px}
+    .lightbox-arrow{width:44px;height:44px}
+    .lightbox-prev{left:8px}
+    .lightbox-next{right:8px}
 }
 </style>
 </head>
@@ -651,11 +880,30 @@ footer{background:#090909;color:rgba(250,250,246,.4);padding:40px 5% 28px;border
       </p>
 
       <div class="tags">
-        <span class="tag">Restaurant</span>
-        <span class="tag">Salon de thé</span>
-        <span class="tag">Boulangerie & Pâtisserie</span>
-        <span class="tag">Service traiteur</span>
-      </div>
+  <span class="tag">Restaurant</span>
+  <span class="tag">Salon de thé</span>
+  <span class="tag">Boulangerie & Pâtisserie</span>
+  <span class="tag">Service traiteur</span>
+  <span class="tag">🌾 Sans gluten sur demande</span>
+</div>
+
+<div class="gluten-annonce">
+    <span class="badge-new">OPTIONS SUR DEMANDE</span>
+
+    <h3>🌾 Des options sans gluten pour tous</h3>
+
+    <p>
+        Chez <strong>Pause à Paris</strong>, nous pensons à tous nos clients.
+        Nous proposons également une sélection de pâtisseries, viennoiseries et
+        préparations sans gluten, réalisées sur demande pour répondre à vos
+        besoins et à ceux de vos invités.
+    </p>
+
+    <a href="#traiteur" class="btn-gluten">
+        Découvrir notre offre →
+    </a>
+</div>
+</div>
     </div>
 
   </div>
@@ -671,68 +919,172 @@ footer{background:#090909;color:rgba(250,250,246,.4);padding:40px 5% 28px;border
       <div class="line"></div>
     </div>
    <div class="spec-card">
-    <h3>Gâteaux marocains</h3>
+    <h3>🌙 Gâteaux marocains</h3>
 
     <div class="spec-images">
+
+    <a href="image/gateau/img6.JPG" class="glightbox" data-gallery="gateaux-marocains">
         <img src="image/gateau/img6.JPG" alt="Gâteau marocain">
+    </a>
+
+    <a href="image/gateau/img8.JPG" class="glightbox" data-gallery="gateaux-marocains">
         <img src="image/gateau/img8.JPG" alt="Gâteau marocain">
+    </a>
+
+    <a href="image/gateau/img5.JPG" class="glightbox" data-gallery="gateaux-marocains">
         <img src="image/gateau/img5.JPG" alt="Gâteau marocain">
+    </a>
+
+    <a href="image/gateau/img9.JPG" class="glightbox" data-gallery="gateaux-marocains">
         <img src="image/gateau/img9.JPG" alt="Gâteau marocain">
+    </a>
+
+    <a href="image/gateau/img10.JPG" class="glightbox" data-gallery="gateaux-marocains">
         <img src="image/gateau/img10.JPG" alt="Gâteau marocain">
+    </a>
+
+    <a href="image/gateau/img7.JPG" class="glightbox" data-gallery="gateaux-marocains">
         <img src="image/gateau/img7.JPG" alt="Gâteau marocain">
-    </div>
+    </a>
+
+</div>
 </div>
 
 <div class="spec-card">
-    <h3>Salés</h3>
-    <div class="spec-images">
-        <img src="image/buffets/CQLME2077.JPG" alt="Salés">
-        <img src="image/buffets/IMG_E4454.JPG" alt="Salés">
-    </div>
+    <h3>🥟 Salés</h3>
+   <div class="spec-images">
+
+    <a href="image/1.png" class="glightbox" data-gallery="sales">
+        <img src="image/1.png" alt="Salés">
+    </a>
+
+    <a href="image/traiteur/3.png" class="glightbox" data-gallery="sales">
+        <img src="image/traiteur/3.png" alt="Salés">
+    </a>
+
+    <a href="image/traiteur/2.png" class="glightbox" data-gallery="sales">
+        <img src="image/traiteur/2.png" alt="Salés">
+    </a>
+
+    <a href="image/traiteur/4.png" class="glightbox" data-gallery="sales">
+        <img src="image/traiteur/4.png" alt="Salés">
+    </a>
+
+</div>
 </div>
 <div class="spec-card">
-    <h3>Pâtisserie française</h3>
-    <div class="spec-images">
-        <img src="image/GJAO8729.JPG" alt="Pâtisserie française">
-        <img src="image/buffets/CFWJ5726.JPG" alt="Pâtisserie française">
-        <img src="image/WhatsApp Image 2026-07-31 at 15.38.51.jpeg" alt="Pâtisserie française">
-        <img src="image/WhatsApp Image 2026-07-31 at 15.38.49.jpeg" alt="Pâtisserie française">
+    <h3>🥐 Pâtisseries & Viennoiseries</h3>
+   <div class="spec-images">
 
-    </div>
+    <a href="image/venoiserie/1.png" class="glightbox" data-gallery="patisseries">
+        <img src="image/venoiserie/1.png" alt="Pâtisserie française">
+    </a>
+
+    <a href="image/venoiserie/venoi2.png" class="glightbox" data-gallery="patisseries">
+        <img src="image/venoiserie/venoi2.png" alt="Pâtisserie française">
+    </a>
+
+    <a href="image/venoiserie/image.jpeg" class="glightbox" data-gallery="patisseries">
+        <img src="image/venoiserie/image.jpeg" alt="Pâtisserie française">
+    </a>
+
+    <a href="image/venoiserie/5.png" class="glightbox" data-gallery="patisseries">
+        <img src="image/venoiserie/5.png" alt="Pâtisserie française">
+    </a>
+
+    <a href="image/img22.jpeg" class="glightbox" data-gallery="patisseries">
+        <img src="image/img22.jpeg" alt="Tranches trompe-l'œil">
+    </a>
+
+</div>
 </div>
 
-      <div class="spec-card">
-        <h3>Tranches trompe-l'œil (Goûter)</h3>
-        <div class="spec-images">
-        <img src="image\img22.jpeg" alt="Tranches trompe-l'œil">
-    </div>
       </div>
  <div class="spec-card">
-    <h3>Chocolats & Macarons</h3>
+    <h3>🍫 Douceurs Fines (Macarons • Chocolats • Dattes Prestige)</h3>
     <div class="spec-images">
-        <img src="image/piece montee/IMG_E4456.JPG" alt="Chocolats & Macarons">
+        <a href="image/dattes prestige/dattee.png" class="glightbox" data-gallery="douceurs-fines">
+            <img src="image/dattes prestige/dattee.png" alt="Chocolats - Macarons - Date presstige">
+        </a>
+        <a href="image/piece montee/IMG_E4456.JPG" class="glightbox" data-gallery="douceurs-fines">
+            <img src="image/piece montee/IMG_E4456.JPG" alt="Chocolats - Macarons - Date presstige">
+        </a>
+        <a href="image/dattes prestige\img1.JPG" class="glightbox" data-gallery="douceurs-fines">
+            <img src="image/dattes prestige\img1.JPG" alt="Chocolats - Macarons - Date presstige">
+        </a>
+        <a href="image/macarron.png" class="glightbox" data-gallery="douceurs-fines">
+            <img src="image/macarron.png" alt="Chocolats - Macarons - Date presstige">
+        </a>
+        <a href="image/dattes prestige\img2.JPG" class="glightbox" data-gallery="douceurs-fines">
+            <img src="image/dattes prestige\img2.JPG" alt="Chocolats - Macarons - Date presstige">
+        </a>
+
     </div>
+</div>
+      
+  <div class="spec-card">
+    <h3>Cuisine internationale</h3>
+  <div class="spec-images">
+
+    <a href="image/img1.png" class="glightbox" data-gallery="cuisine">
+        <img src="image/img1.png" alt="Cuisine internationale">
+    </a>
+
+    <a href="image/img4.png" class="glightbox" data-gallery="cuisine">
+        <img src="image/img4.png" alt="Cuisine internationale">
+    </a>
+
+    <a href="image/img5.png" class="glightbox" data-gallery="cuisine">
+        <img src="image/img5.png" alt="Cuisine internationale">
+    </a>
+
+    <a href="image/imag.jpeg" class="glightbox" data-gallery="cuisine">
+        <img src="image/imag.jpeg" alt="Cuisine internationale">
+    </a>
+
+</div>
 </div>
       <div class="spec-card">
         <div class="spec-icon"></div>
-        <h3>Viennoiseries artisanales</h3>
-      </div>
-  <div class="spec-card">
-    <h3>Cuisine internationale</h3>
-    <div class="spec-images">
-        <img src="image/LRCH9177.JPG" alt="Cuisine internationale">
-        <img src="image/YKWY3277.JPG" alt="Cuisine internationale">
-        <img src="image/FBXH5254.JPG" alt="Cuisine internationale">
-        <img src="image/WhatsApp Image 2026-07-31 at 15.38.50 (2).jpeg" alt="Cuisine internationale">
-        <img src="image/imag.jpeg" alt="Cuisine internationale">
+       <div class="spec-card">
+    <h3>🎂 Créations sur mesure</h3>
 
+    <div class="spec-images">
+
+        <a href="image/traiteur/1.png" class="glightbox" data-gallery="creations">
+            <img src="image/traiteur/1.png" alt="Création sur mesure">
+        </a>
+
+        <a href="image/traiteur/t.png" class="glightbox" data-gallery="creations">
+            <img src="image/traiteur/t.png" alt="Création sur mesure">
+        </a>
+
+        <a href="image/traiteur/n.png" class="glightbox" data-gallery="creations">
+            <img src="image/traiteur/n.png" alt="Création sur mesure">
+        </a>
+
+        <a href="image/piece montee/b.JPG" class="glightbox" data-gallery="creations">
+            <img src="image/piece montee/b.JPG" alt="Création sur mesure">
+        </a>
+
+        <a href="image/piece montee/C.JPG" class="glightbox" data-gallery="creations">
+            <img src="image/piece montee/C.JPG" alt="Création sur mesure">
+        </a>
+
+        <a href="image/piece montee/g.JPG" class="glightbox" data-gallery="creations">
+            <img src="image/piece montee/g.JPG" alt="Création sur mesure">
+        </a>
+
+        <a href="image/piece montee/I.JPG" class="glightbox" data-gallery="creations">
+            <img src="image/piece montee/I.JPG" alt="Création sur mesure">
+        </a>
+
+        <a href="image/piece montee/E.JPG" class="glightbox" data-gallery="creations">
+            <img src="image/piece montee/E.JPG" alt="Création sur mesure">
+        </a>
 
     </div>
 </div>
-      <div class="spec-card">
-        <div class="spec-icon">🥣</div>
-        <h3>Couscous & Harira</h3>
-      </div>
     </div>
   </div>
 </section>
@@ -749,19 +1101,35 @@ footer{background:#090909;color:rgba(250,250,246,.4);padding:40px 5% 28px;border
     </div>
     <div class="tb rv">
       <div class="chip">Service traiteur</div>
-      <h2 class="sh">Le savoir-faire <em>Pause à Paris</em><br>au service de vos événements</h2>
-      <p>Notre équipe vous accompagne dans l'organisation de vos événements privés ou professionnels. Nous imaginons des menus personnalisés, préparés avec des produits frais et servis avec le plus grand soin.</p>
-      <div class="tq">« Mariage, anniversaire, réception privée ou événement d'entreprise, nous mettons notre passion et notre savoir-faire au service de votre réussite. »« Mariage, anniversaire, réception privée ou événement d'entreprise, nous mettons notre passion et notre savoir-faire au service de votre réussite. »</div>
-      <ul class="tlist">
-        <li>Mariages & Fiançailles</li>
-        <li>Anniversaires</li>
-        <li>Ftour Ramadan</li>
-        <li>Brunchs privés</li>
-        <li>Baptêmes & Réceptions familiales</li>
-        <li>Soutenances & Remises de diplômes</li>
-        <li>Buffets d'entreprise</li>
-        <li>Séminaires & Événements professionnels</li>
-    </ul>
+      <h2 class="sh">Une attention portée à tous vos invités</h2>
+   <div class="gluten-annonce">
+    <span class="badge-new">🌾 SUR DEMANDE</span>
+
+    <h3>Des créations sans gluten, préparées avec le même savoir-faire</h3>
+
+    <p>
+        Chez <strong>Pause à Paris</strong>, nous pensons à chacun de vos invités.
+        Nous réalisons également des pâtisseries et préparations sans gluten,
+        confectionnées sur demande avec les mêmes exigences de qualité,
+        de fraîcheur et de raffinement que l'ensemble de nos créations.
+    </p>
+
+    <a href="#contact" class="btn-gluten">
+        Découvrir notre offre →
+    </a>
+</div>
+      <div class="tq">« Mariage, anniversaire, réception privée ou événement d'entreprise, nous mettons notre passion et notre savoir-faire au service de votre réussite. »</div>
+     <ul class="tlist">
+    <li>Mariages & Fiançailles</li>
+    <li>Réceptions familiales</li>
+    <li>Anniversaires</li>
+    <li>Baptêmes</li>
+    <li>Ftour Ramadan</li>
+    <li>Soutenances & Remises de diplômes</li>
+    <li>Buffets d'entreprise</li>
+    <li>Séminaires & Événements professionnels</li>
+    <li>🌾 Options sans gluten sur demande</li>
+</ul>
 <p class="tinfo">
 Pour plus de renseignements concernant notre service traiteur ou pour obtenir un devis personnalisé,
 contactez-nous directement sur WhatsApp ou rendez-nous visite en magasin.
@@ -790,26 +1158,33 @@ contactez-nous directement sur WhatsApp ou rendez-nous visite en magasin.
   <div class="avg">
     <div class="ac2 rv">
       <div class="aqm">"</div>
+      <div class="aauth"><div class="aav">NH</div><div><div class="anm">Naoufel Harnafi</div><div class="adt">Cuisine : 5/5  |  Service : 5/5  |  Ambiance : 5/5</div></div></div>
       <div class="asts">★★★★★</div>
-      <p class="atxt">Le meilleur brunch d'Oujda, sans aucun doute. Les viennoiseries sont à tomber et les petits déjeuners sont soignés dans les moindres détails. On se croirait vraiment à Paris !</p>
-      <div class="aauth"><div class="aav">S</div><div><div class="anm">Salma B.</div><div class="adt">Oujda · il y a 2 semaines</div></div></div>
+      <p class="atxt">Une excellente expérience du début à la fin. Le cadre est magnifique, l’ambiance est agréable et le personnel est très accueillant. Les plats sont savoureux, préparés avec soin et servis rapidement. Le café est également de très bonne qualité. Tout est propre et bien organisé. Je recommande vivement cet établissement à toute personne recherchant un endroit de qualité pour manger ou se détendre. Cinq étoiles largement méritées 👌🏽</p>
     </div>
     <div class="ac2 rv">
       <div class="aqm">"</div>
+      <div class="aauth"><div class="aav">HZ</div><div><div class="anm">Hossam Zaouch</div><div class="adt">Cuisine : 5/5  |  Service : 5/5  |  Ambiance : 5/5</div></div></div>
       <div class="asts">★★★★★</div>
-      <p class="atxt">Service traiteur incroyable pour notre mariage. L'équipe était aux petits soins du début à la fin. Tous nos invités ont été bluffés par la qualité et la présentation des buffets.</p>
-      <div class="aauth"><div class="aav">Y</div><div><div class="anm">Youssef & Nadia</div><div class="adt">Oujda · il y a 1 mois</div></div></div>
+      <p class="atxt">Excellente adresse à Oujda ! Les pâtisseries sont tout simplement délicieuses, on se croirait vraiment dans une pâtisserie parisienne. L’équipe est très professionnelle, l’accueil est chaleureux et le patron est toujours aux petits soins. L’ambiance est conviviale, idéale pour un petit déjeuner en famille, dans un lieu très bien fréquenté. C’est aussi l’un des rares cafés non-fumeurs de la ville, ce qui est très appréciable.
+À midi, on peut y déguster des plats savoureux. Les étudiants y trouvent également un cadre parfait pour réviser, avec une musique d’ambiance agréable et une excellente connexion Wi-Fi. Les décorations sont superbes, on se croirait au Carette, face au Trocadéro. Une vraie pépite !.</p>
+      
+
     </div>
+
     <div class="ac2 rv">
       <div class="aqm">"</div>
+      <div class="aauth"><div class="aav">JR</div><div><div class="anm">Jihane Rhafes</div><div class="adt">Taille de groupe : 3-4 personnes : Place de parking : Il est facile de se garer | Options de stationnement : Parking gratuit, Parking gratuit dans la rue</div></div></div>
       <div class="asts">★★★★★</div>
-      <p class="atxt">Le couscous du vendredi est une merveille ! L'ambiance chic, le service chaleureux et les pâtisseries dignes des meilleures maisons. Notre adresse favorite à Oujda.</p>
-      <div class="aauth"><div class="aav">L</div><div><div class="anm">Laila M.</div><div class="adt">Oujda · il y a 3 semaines</div></div></div>
+      <p class="atxt">Franchement, c’est toujours un plaisir de venir chez vous.Le service est excellent, l’équipe est adorable, toujours souriante et accueillante. On se sent comme chez soi, pas juste comme un simple client qui vient acheter.En plus, la qualité est toujours au rendez-vous.Merci pour votre professionnalisme et votre bonne humeur ❤️</p>
+     
+
     </div>
   </div>
+</div>
 </section>
 
-<!-- CONTACT -->
+<!-- nous trouver -->
 <section id="contact">
   <div class="cw">
     <div class="ci rv">
@@ -818,7 +1193,7 @@ contactez-nous directement sur WhatsApp ou rendez-nous visite en magasin.
       <div class="clist">
         <div class="cit"><div class="cion">📍</div><div><div class="clbl">Adresse</div><span class="cval">Complexe Coralia îlot 7, Oujda 60000, Maroc</span></div></div>
         <div class="cit"><div class="cion">📞</div><div><div class="clbl">Téléphone</div><a href="tel:+212661829860" class="cval">+212 661-829860</a></div></div>
-        <div class="cit"><div class="cion">🕐</div><div><div class="clbl">Horaires</div><span class="cval">Ouvert tous les jours jusqu'à minuit (00:00)<br><span style="color:var(--or)">🫕 Couscous & Harira — chaque vendredi</span></span></div></div>
+        <div class="cit"><div class="cion">🕐</div><div><div class="clbl">Horaires</div><span class="cval">Ouvert tous les jours jusqu'à minuit (00:00)<br></span></div></div>
         <div class="cit"><div class="cion">📶</div><div><div class="clbl">Services</div><span class="cval">Terrasse · Wi-Fi gratuit · Sur place · À emporter · Livraison</span></div></div>
       </div>
       <div class="cbtns">
@@ -842,6 +1217,7 @@ contactez-nous directement sur WhatsApp ou rendez-nous visite en magasin.
     </div>
     <div class="fcp"><em>Pause à Paris</em> © 2026 &nbsp;·&nbsp; Complexe Coralia îlot 7, Oujda 60000, Maroc</div>
   </div>
+  <br>
   <div class="notice rv">
   <span class="nic">🫕</span>
   <div>
@@ -852,10 +1228,12 @@ contactez-nous directement sur WhatsApp ou rendez-nous visite en magasin.
 </div>
 </footer>
 
+<!-- Ton JavaScript -->
 <script>
 const hb=document.getElementById('HB'),nl=document.getElementById('NL');
 hb.addEventListener('click',()=>nl.classList.toggle('open'));
 nl.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>nl.classList.remove('open')));
+
 const MT = document.getElementById('MT');
 
 if (MT) {
@@ -872,9 +1250,104 @@ if (MT) {
         if (panel) panel.classList.add('active');
     });
 }
-const obs=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('on')}),{threshold:.08});
+
+const obs=new IntersectionObserver(es=>es.forEach(e=>{
+    if(e.isIntersecting)e.target.classList.add('on')
+}),{threshold:.08});
+
 document.querySelectorAll('.rv').forEach(el=>obs.observe(el));
-window.addEventListener('scroll',()=>{document.getElementById('nav').style.height=window.scrollY>60?'56px':'68px'});
+
+window.addEventListener('scroll',()=>{
+    document.getElementById('nav').style.height=window.scrollY>60?'56px':'68px'
+});
+
+const galleryLinks = Array.from(document.querySelectorAll('#specialite .spec-images a'));
+const galleryGroups = {};
+
+galleryLinks.forEach(link => {
+    const group = link.dataset.gallery || 'specialite-default';
+    if (!galleryGroups[group]) galleryGroups[group] = [];
+    galleryGroups[group].push(link);
+});
+
+const overlay = document.createElement('div');
+overlay.className = 'lightbox-overlay';
+overlay.setAttribute('role', 'dialog');
+overlay.setAttribute('aria-modal', 'true');
+overlay.setAttribute('aria-hidden', 'true');
+overlay.innerHTML = `
+    <button class="lightbox-close" aria-label="Fermer">×</button>
+    <button class="lightbox-arrow lightbox-prev" aria-label="Image précédente">‹</button>
+    <div class="lightbox-stage">
+        <img src="" alt="">
+    </div>
+    <button class="lightbox-arrow lightbox-next" aria-label="Image suivante">›</button>
+`;
+document.body.appendChild(overlay);
+
+const stageImg = overlay.querySelector('.lightbox-stage img');
+const closeBtn = overlay.querySelector('.lightbox-close');
+const prevBtn = overlay.querySelector('.lightbox-prev');
+const nextBtn = overlay.querySelector('.lightbox-next');
+
+let currentGroup = [];
+let currentIndex = 0;
+
+function updateLightboxImage() {
+    const activeLink = currentGroup[currentIndex];
+    if (!activeLink) return;
+    const activeImg = activeLink.querySelector('img');
+    stageImg.src = activeLink.href;
+    stageImg.alt = activeImg ? activeImg.alt : '';
+}
+
+function openLightbox(groupName, index) {
+    currentGroup = galleryGroups[groupName] || [];
+    currentIndex = index;
+    if (!currentGroup.length) return;
+    updateLightboxImage();
+    overlay.classList.add('is-open');
+    overlay.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+}
+
+function closeLightbox() {
+    overlay.classList.remove('is-open');
+    overlay.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+}
+
+function moveLightbox(direction) {
+    if (!currentGroup.length) return;
+    currentIndex = (currentIndex + direction + currentGroup.length) % currentGroup.length;
+    updateLightboxImage();
+}
+
+galleryLinks.forEach(link => {
+    link.addEventListener('click', event => {
+        event.preventDefault();
+        const group = link.dataset.gallery || 'specialite-default';
+        const groupItems = galleryGroups[group] || [];
+        const activeIndex = groupItems.indexOf(link);
+        openLightbox(group, activeIndex >= 0 ? activeIndex : 0);
+    });
+});
+
+closeBtn.addEventListener('click', closeLightbox);
+prevBtn.addEventListener('click', () => moveLightbox(-1));
+nextBtn.addEventListener('click', () => moveLightbox(1));
+overlay.addEventListener('click', event => {
+    if (event.target === overlay) closeLightbox();
+});
+
+document.addEventListener('keydown', event => {
+    if (!overlay.classList.contains('is-open')) return;
+
+    if (event.key === 'Escape') closeLightbox();
+    if (event.key === 'ArrowLeft') moveLightbox(-1);
+    if (event.key === 'ArrowRight') moveLightbox(1);
+});
 </script>
+
 </body>
 </html>
