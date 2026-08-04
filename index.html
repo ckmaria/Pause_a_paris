@@ -1229,11 +1229,18 @@ const hb=document.getElementById('HB'),nl=document.getElementById('NL'),mo=docum
 const closeMenu=()=>{nl.classList.remove('open');mo.classList.remove('open');};
 const openMenu=()=>{nl.classList.add('open');mo.classList.add('open');};
 
-hb.addEventListener('click',()=>{
+hb.addEventListener('click',e=>{
+    e.stopPropagation();
     if (nl.classList.contains('open')) {
         closeMenu();
     } else {
         openMenu();
+    }
+});
+
+document.addEventListener('click',e=>{
+    if (!nl.contains(e.target) && !hb.contains(e.target)) {
+        closeMenu();
     }
 });
 
