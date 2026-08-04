@@ -1355,6 +1355,15 @@ document.addEventListener('keydown', event => {
     if (event.key === 'ArrowLeft') moveLightbox(-1);
     if (event.key === 'ArrowRight') moveLightbox(1);
 });
+document.addEventListener("click", function(e){
+    if(!menu.contains(e.target) && !burger.contains(e.target)){
+        menu.classList.remove("active");
+    }
+});
+
+window.addEventListener("scroll", function(){
+    menu.classList.remove("active");
+});
 </script>
 
 </body>
