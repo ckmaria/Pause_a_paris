@@ -499,7 +499,8 @@ footer{background:#090909;color:rgba(250,250,246,.4);padding:40px 5% 28px;border
   .hb{display:flex}
   .mobile-menu-overlay{display:block;position:fixed;inset:0;background:rgba(15,15,15,.4);opacity:0;pointer-events:none;transition:opacity .28s ease;z-index:999}
   .mobile-menu-overlay.open{opacity:1;pointer-events:auto}
-  .nlinks{display:flex;position:fixed;top:68px;left:0;right:0;background:rgba(20,20,20,.98);padding:26px 5% 34px;gap:17px;border-top:1px solid rgba(201,164,74,.1);flex-direction:column;align-items:flex-start;z-index:1000}
+  .nlinks{display:none;opacity:0;visibility:hidden;pointer-events:none;position:fixed;top:68px;left:0;right:0;background:rgba(20,20,20,.98);padding:26px 5% 34px;gap:17px;border-top:1px solid rgba(201,164,74,.1);flex-direction:column;align-items:flex-start;z-index:1000}
+  .nlinks.open{display:flex;opacity:1;visibility:visible;pointer-events:auto}
   .nlinks a{color:rgba(250,250,246,.58);font-size:.71rem;letter-spacing:.17em;text-transform:uppercase}
   .mobile-menu-close{display:flex;position:absolute;top:16px;right:16px;align-items:center;justify-content:center;width:38px;height:38px;border:none;border-radius:50%;background:transparent;color:var(--w);font-size:1.3rem;cursor:pointer}
   .mobile-menu-close:hover{background:rgba(74,94,58,.08)}
@@ -1225,152 +1226,87 @@ contactez-nous directement sur WhatsApp ou rendez-nous visite en magasin.
 
 <!-- Ton JavaScript -->
 <script>
-const hb=document.getElementById('HB'),nl=document.getElementById('NL'),mo=document.getElementById('MO'),mc=document.getElementById('MC');
-const closeMenu=()=>{nl.classList.remove('open');mo.classList.remove('open');};
-const openMenu=()=>{nl.classList.add('open');mo.classList.add('open');};
+const hb = document.getElementById('HB');
+const nl = document.getElementById('NL');
+const mo = document.getElementById('MO');
+const mc = document.getElementById('MC');
 
-hb.addEventListener('click',e=>{
-    e.stopPropagation();
-    if (nl.classList.contains('open')) {
-        closeMenu();
-    } else {
-        openMenu();
-    }
-});
+const closeMenu = () => {
+    if (!nl || !mo) return;
 
-document.addEventListener('click',e=>{
-    if (!nl.contains(e.target) && !hb.contains(e.target)) {
-        closeMenu();
-    }
-});
+    nl.classList.remove('open');
+    mo.classList.remove('open');
+};
 
-if (mc) mc.addEventListener('click', closeMenu);
-if (mo) mo.addEventListener('click', closeMenu);
-window.addEventListener('scroll', closeMenu, { passive: true });
-nl.querySelectorAll('a').forEach(a=>a.addEventListener('click', closeMenu));
+const openMenu = () => {
+    if (!nl || !mo) return;
 
-const MT = document.getElementById('MT');
+    nl.classList.add('open');
+    mo.classList.add('open');
+};
 
-if (MT) {
-    MT.addEventListener('click', e => {
-        const b = e.target.closest('.mt');
-        if (!b) return;
 
-        document.querySelectorAll('.mt').forEach(x => x.classList.remove('active'));
-        document.querySelectorAll('.mp').forEach(x => x.classList.remove('active'));
+// Bouton hamburger
+if (hb) {
+    hb.addEventListener('click', (e) => {
+        e.stopPropagation();
 
-        b.classList.add('active');
-
-        const panel = document.getElementById('tab-' + b.dataset.tab);
-        if (panel) panel.classList.add('active');
+        if (nl.classList.contains('open')) {
+            closeMenu();
+        } else {
+            openMenu();
+        }
     });
 }
 
-const obs=new IntersectionObserver(es=>es.forEach(e=>{
-    if(e.isIntersecting)e.target.classList.add('on')
-}),{threshold:.08});
 
-document.querySelectorAll('.rv').forEach(el=>obs.observe(el));
+// Cliquer en dehors du menu
+document.addEventListener('click', (e) => {
 
-window.addEventListener('scroll',()=>{
-    document.getElementById('nav').style.height=window.scrollY>60?'56px':'68px'
-});
-
-const galleryLinks = Array.from(document.querySelectorAll('#specialite .spec-images a'));
-const galleryGroups = {};
-
-galleryLinks.forEach(link => {
-    const group = link.dataset.gallery || 'specialite-default';
-    if (!galleryGroups[group]) galleryGroups[group] = [];
-    galleryGroups[group].push(link);
-});
-
-const overlay = document.createElement('div');
-overlay.className = 'lightbox-overlay';
-overlay.setAttribute('role', 'dialog');
-overlay.setAttribute('aria-modal', 'true');
-overlay.setAttribute('aria-hidden', 'true');
-overlay.innerHTML = `
-    <button class="lightbox-close" aria-label="Fermer">×</button>
-    <button class="lightbox-arrow lightbox-prev" aria-label="Image précédente">‹</button>
-    <div class="lightbox-stage">
-        <img src="" alt="">
-    </div>
-    <button class="lightbox-arrow lightbox-next" aria-label="Image suivante">›</button>
-`;
-document.body.appendChild(overlay);
-
-const stageImg = overlay.querySelector('.lightbox-stage img');
-const closeBtn = overlay.querySelector('.lightbox-close');
-const prevBtn = overlay.querySelector('.lightbox-prev');
-const nextBtn = overlay.querySelector('.lightbox-next');
-
-let currentGroup = [];
-let currentIndex = 0;
-
-function updateLightboxImage() {
-    const activeLink = currentGroup[currentIndex];
-    if (!activeLink) return;
-    const activeImg = activeLink.querySelector('img');
-    stageImg.src = activeLink.href;
-    stageImg.alt = activeImg ? activeImg.alt : '';
-}
-
-function openLightbox(groupName, index) {
-    currentGroup = galleryGroups[groupName] || [];
-    currentIndex = index;
-    if (!currentGroup.length) return;
-    updateLightboxImage();
-    overlay.classList.add('is-open');
-    overlay.setAttribute('aria-hidden', 'false');
-    document.body.style.overflow = 'hidden';
-}
-
-function closeLightbox() {
-    overlay.classList.remove('is-open');
-    overlay.setAttribute('aria-hidden', 'true');
-    document.body.style.overflow = '';
-}
-
-function moveLightbox(direction) {
-    if (!currentGroup.length) return;
-    currentIndex = (currentIndex + direction + currentGroup.length) % currentGroup.length;
-    updateLightboxImage();
-}
-
-galleryLinks.forEach(link => {
-    link.addEventListener('click', event => {
-        event.preventDefault();
-        const group = link.dataset.gallery || 'specialite-default';
-        const groupItems = galleryGroups[group] || [];
-        const activeIndex = groupItems.indexOf(link);
-        openLightbox(group, activeIndex >= 0 ? activeIndex : 0);
-    });
-});
-
-closeBtn.addEventListener('click', closeLightbox);
-prevBtn.addEventListener('click', () => moveLightbox(-1));
-nextBtn.addEventListener('click', () => moveLightbox(1));
-overlay.addEventListener('click', event => {
-    if (event.target === overlay) closeLightbox();
-});
-
-document.addEventListener('keydown', event => {
-    if (!overlay.classList.contains('is-open')) return;
-
-    if (event.key === 'Escape') closeLightbox();
-    if (event.key === 'ArrowLeft') moveLightbox(-1);
-    if (event.key === 'ArrowRight') moveLightbox(1);
-});
-document.addEventListener("click", function(e){
-    if(!menu.contains(e.target) && !burger.contains(e.target)){
-        menu.classList.remove("active");
+    if (
+        nl &&
+        !nl.contains(e.target) &&
+        hb &&
+        !hb.contains(e.target)
+    ) {
+        closeMenu();
     }
+
 });
 
-window.addEventListener("scroll", function(){
-    menu.classList.remove("active");
-});
+
+// Bouton fermer X
+if (mc) {
+    mc.addEventListener('click', () => {
+        closeMenu();
+    });
+}
+
+
+// Cliquer sur le fond noir
+if (mo) {
+    mo.addEventListener('click', () => {
+        closeMenu();
+    });
+}
+
+
+// Scroll = fermer menu
+window.addEventListener('scroll', () => {
+    closeMenu();
+}, { passive: true });
+
+
+// Cliquer sur un lien = fermer menu
+if (nl) {
+    nl.querySelectorAll('a').forEach((a) => {
+
+        a.addEventListener('click', () => {
+            closeMenu();
+        });
+
+    });
+}
 </script>
 
 </body>
