@@ -35,6 +35,8 @@ nav{position:fixed;top:0;left:0;right:0;z-index:1000;height:68px;padding:0 5%;di
 .ncta:hover{background:var(--vl)!important}
 .hb{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer}
 .hb span{display:block;width:23px;height:1.5px;background:var(--w);transition:all .3s}
+.mobile-menu-overlay{display:none}
+.mobile-menu-close{display:none}
 
 /* HERO */
 #hero{position:relative;height:100vh;min-height:640px;display:flex;align-items:center;justify-content:center;overflow:hidden;background:#0f0f0f}
@@ -494,9 +496,14 @@ footer{background:#090909;color:rgba(250,250,246,.4);padding:40px 5% 28px;border
 
 /* RESPONSIVE */
 @media(max-width:960px){
-  nav .nlinks{display:none}
-  nav .nlinks.open{display:flex;flex-direction:column;position:fixed;top:68px;left:0;right:0;background:rgba(20,20,20,.98);padding:26px 5% 34px;gap:17px;border-top:1px solid rgba(201,164,74,.1)}
   .hb{display:flex}
+  .mobile-menu-overlay{display:block;position:fixed;inset:0;background:rgba(15,15,15,.4);opacity:0;pointer-events:none;transition:opacity .28s ease;z-index:999}
+  .mobile-menu-overlay.open{opacity:1;pointer-events:auto}
+  .nlinks{display:flex;position:fixed;top:0;right:0;width:280px;height:100vh;padding:74px 18px 24px;flex-direction:column;align-items:flex-start;gap:14px;background:#faf8f3;border-radius:18px 0 0 18px;box-shadow:-8px 0 28px rgba(0,0,0,.1);transform:translateX(110%);transition:transform .3s ease;z-index:1000}
+  .nlinks.open{transform:translateX(0)}
+  .nlinks a{color:var(--v);font-size:.72rem;letter-spacing:.16em;text-transform:uppercase}
+  .mobile-menu-close{display:flex;position:absolute;top:16px;right:16px;align-items:center;justify-content:center;width:38px;height:38px;border:none;border-radius:50%;background:transparent;color:var(--v);font-size:1.3rem;cursor:pointer}
+  .mobile-menu-close:hover{background:rgba(74,94,58,.08)}
   .ag{display:flex;flex-direction:column;gap:30px;align-items:stretch}
   .ag,.tg,.cw{grid-template-columns:1fr}
   .aphotos{height:auto}
@@ -800,18 +807,17 @@ footer{background:#090909;color:rgba(250,250,246,.4);padding:40px 5% 28px;border
     <span class="nb">Pause <em>à Paris</em></span>
   </a>
   <ul class="nlinks" id="NL">
+    <button class="mobile-menu-close" id="MC" aria-label="Fermer le menu">✕</button>
     <li><a href="#apropos">À propos</a></li>
     <li><a href="#specialite">Spécialités</a></li>
-
     <li><a href="https://videomenu-pause-a-paris.vercel.app" target="_blank" rel="noopener noreferrer">Menu</a></li>
     <li><a href="#traiteur">Traiteur</a></li>
-   
-    
   </ul>
   <button class="hb" id="HB" aria-label="menu">
     <span></span><span></span><span></span>
   </button>
 </nav>
+<div class="mobile-menu-overlay" id="MO"></div>
 
 <!-- HERO -->
 <section id="hero">
@@ -1220,9 +1226,21 @@ contactez-nous directement sur WhatsApp ou rendez-nous visite en magasin.
 
 <!-- Ton JavaScript -->
 <script>
-const hb=document.getElementById('HB'),nl=document.getElementById('NL');
-hb.addEventListener('click',()=>nl.classList.toggle('open'));
-nl.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>nl.classList.remove('open')));
+const hb=document.getElementById('HB'),nl=document.getElementById('NL'),mo=document.getElementById('MO'),mc=document.getElementById('MC');
+const closeMenu=()=>{nl.classList.remove('open');mo.classList.remove('open');};
+const openMenu=()=>{nl.classList.add('open');mo.classList.add('open');};
+
+hb.addEventListener('click',()=>{
+    if (nl.classList.contains('open')) {
+        closeMenu();
+    } else {
+        openMenu();
+    }
+});
+
+if (mc) mc.addEventListener('click', closeMenu);
+if (mo) mo.addEventListener('click', closeMenu);
+nl.querySelectorAll('a').forEach(a=>a.addEventListener('click', closeMenu));
 
 const MT = document.getElementById('MT');
 
