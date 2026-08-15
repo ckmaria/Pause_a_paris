@@ -75,8 +75,11 @@ section{padding:88px 5%}
 .chip::before{content:'';display:block;width:26px;height:1.5px;background:var(--v)}
 .sh{font-family:'Playfair Display',serif;font-size:clamp(1.9rem,4.2vw,3.3rem);font-weight:400;line-height:1.1}
 .sh em{font-style:italic;color:var(--v)}
-.rv{opacity:0;transform:translateY(30px);transition:opacity .7s ease,transform .7s ease}
-.rv.on{opacity:1;transform:none}
+.rv {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: opacity .7s ease, transform .7s ease;
+}.rv.on{opacity:1;transform:none}
 
 /* ABOUT */
 #apropos {
@@ -814,7 +817,95 @@ footer{background:#090909;color:rgba(250,250,246,.4);padding:40px 5% 28px;border
     .lightbox-prev{left:8px}
     .lightbox-next{right:8px}
 }
+.spec-item{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+}
+
+.spec-caption{
+    margin-top:8px;
+    text-align:center;
+    font-size:.85rem;
+    font-weight:600;
+    color:#2d402b;
+}
+/* Galerie photo */
+.photo-modal {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.95);
+    align-items: center;
+    justify-content: center;
+}
+
+.photo-modal.active {
+    display: flex;
+}
+
+.photo-modal img {
+    max-width: 90%;
+    max-height: 85vh;
+    object-fit: contain;
+    position: relative;
+    z-index: 10000;
+}
+
+/* Bouton de fermeture ✕ */
+.photo-close {
+    position: absolute;
+    top: 20px;
+    right: 25px;
+    z-index: 10001;
+    width: 44px;
+    height: 44px;
+    background: rgba(0, 0, 0, 0.6);
+    color: #ffffff;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    font-size: 24px;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    user-select: none;
+    transition: background 0.2s, transform 0.2s;
+}
+
+.photo-close:hover {
+    background: rgba(0, 0, 0, 0.9);
+    transform: scale(1.05);
+}
+
+/* Flèches de navigation (si présentes) */
+.photo-prev,
+.photo-next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10001;
+    width: 44px;
+    height: 44px;
+    background: rgba(0, 0, 0, 0.6);
+    color: #ffffff;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    user-select: none;
+}
+
+.photo-prev { left: 20px; }
+.photo-next { right: 20px; } 
+
 </style>
+
 </head>
 <body>
 
@@ -943,81 +1034,207 @@ footer{background:#090909;color:rgba(250,250,246,.4);padding:40px 5% 28px;border
       <div class="line"></div>
     </div>
    <div class="spec-card">
-    <h3>🌙 Gâteaux marocains</h3>
+<h3>🌙 Gâteaux marocains</h3>
 
     <div class="spec-images">
 
-    <a href="image/gateau/img6.png" class="glightbox" data-gallery="gateaux-marocains">
-        <img src="image/gateau/img6.png" alt="Gâteau marocain">
-    </a>
+        <div class="spec-item">
+            <a href="image/gateau/gat (1).jpg" class="glightbox" data-gallery="gateaux-marocains">
+                <img src="image/gateau/gat (1).jpg" alt="Gâteau marocain">
+            </a>
+            <span class="spec-caption">Cornes ghazal</span>
+        </div>
 
-    <a href="image/gateau/img8.png" class="glightbox" data-gallery="gateaux-marocains">
-        <img src="image/gateau/img8.png" alt="Gâteau marocain">
-    </a>
+        <div class="spec-item">
+            <a href="image/gateau/gat (2).jpg" class="glightbox" data-gallery="gateaux-marocains">
+                <img src="image/gateau/gat (2).jpg" alt="Gâteau marocain">
+            </a>
+            
+             <span class="spec-caption">Petit plateau varié</span> 
+        </div>
 
-    <a href="image/gateau/img5.png" class="glightbox" data-gallery="gateaux-marocains">
-        <img src="image/gateau/img5.png" alt="Gâteau marocain">
-    </a>
+        <div class="spec-item">
+            <a href="image/gateau/gat (3).jpg" class="glightbox" data-gallery="gateaux-marocains">
+                <img src="image/gateau/gat (3).jpg" alt="Gâteau marocain">
+            </a>
+            <span class="spec-caption">Petit plateau amande</span>
+        </div>
 
-    <a href="image/gateau/img9.png" class="glightbox" data-gallery="gateaux-marocains">
-        <img src="image/gateau/img9.png" alt="Gâteau marocain">
-    </a>
+        <div class="spec-item">
+            <a href="image/gateau/gat (4).jpg" class="glightbox" data-gallery="gateaux-marocains">
+                <img src="image/gateau/gat (4).jpg" alt="Gâteau marocain">
+            </a>
+            <span class="spec-caption">Sablé fromage</span>
 
-    <a href="image/gateau/img10.png" class="glightbox" data-gallery="gateaux-marocains">
-        <img src="image/gateau/img10.png" alt="Gâteau marocain">
-    </a>
+        </div>
 
-    <a href="image/gateau/img7.png" class="glightbox" data-gallery="gateaux-marocains">
-        <img src="image/gateau/img7.png" alt="Gâteau marocain">
-    </a>
+        <div class="spec-item">
+            <a href="image/gateau/gat (5).jpg" class="glightbox" data-gallery="gateaux-marocains">
+                <img src="image/gateau/gat (5).jpg" alt="Gâteau marocain">
+            </a>
+            <span class="spec-caption">Sablé nougat sesame</span>
+        </div>
 
-</div>
-</div>
+        <div class="spec-item">
+            <a href="image/gateau/gat (6).jpg" class="glightbox" data-gallery="gateaux-marocains">
+                <img src="image/gateau/gat (6).jpg" alt="Gâteau marocain">
+            </a>
+            <span class="spec-caption">Sablé céréales</span>
+        </div>
 
-<div class="spec-card">
-    <h3>🥟 Salés</h3>
-   <div class="spec-images">
+        <div class="spec-item">
+            <a href="image/gateau/gat (7).jpg" class="glightbox" data-gallery="gateaux-marocains">
+                <img src="image/gateau/gat (7).jpg" alt="Gâteau marocain">
+            </a>
+            <span class="spec-caption">Sablés</span>
+        </div>
 
-    <a href="image/1.png" class="glightbox" data-gallery="sales">
-        <img src="image/1.png" alt="Salés">
-    </a>
+        <div class="spec-item">
+            <a href="image/gateau/gat (8).jpg" class="glightbox" data-gallery="gateaux-marocains">
+                <img src="image/gateau/gat (8).jpg" alt="Gâteau marocain">
+            </a>
+            <span class="spec-caption">Petit plateau varié</span>
+        </div>
 
-    <a href="image/traiteur/3.png" class="glightbox" data-gallery="sales">
-        <img src="image/traiteur/3.png" alt="Salés">
-    </a>
+        <div class="spec-item">
+            <a href="image/gateau/gat (9).jpg" class="glightbox" data-gallery="gateaux-marocains">
+                <img src="image/gateau/gat (9).jpg" alt="Gâteau marocain">
+            </a>
+            <span class="spec-caption">Sablé</span>
+        </div>
 
-    <a href="image/traiteur/2.png" class="glightbox" data-gallery="sales">
-        <img src="image/traiteur/2.png" alt="Salés">
-    </a>
+        <div class="spec-item">
+            <a href="image/gateau/gat (10).jpg" class="glightbox" data-gallery="gateaux-marocains">
+                <img src="image/gateau/gat (10).jpg" alt="Gâteau marocain">
+            </a>
+            <span class="spec-caption">Gateau sablé noissette </span>
+        </div>
 
-    <a href="image/traiteur/4.png" class="glightbox" data-gallery="sales">
-        <img src="image/traiteur/4.png" alt="Salés">
-    </a>
+        <div class="spec-item">
+            <a href="image/gateau/gat (11).jpg" class="glightbox" data-gallery="gateaux-marocains">
+                <img src="image/gateau/gat (11).jpg" alt="Gâteau marocain">
+            </a>
+            <span class="spec-caption">Sablé chocolat blanc</span>
+        </div>
 
-</div>
+        <div class="spec-item">
+            <a href="image/gateau/gat (12).jpg" class="glightbox" data-gallery="gateaux-marocains">
+                <img src="image/gateau/gat (12).jpg" alt="Gâteau marocain">
+            </a>
+            <span class="spec-caption">Sablé chocolat framboise</span>
+
+        </div>
+
+        <div class="spec-item">
+            <a href="image/gateau/gat (14).jpg" class="glightbox" data-gallery="gateaux-marocains">
+                <img src="image/gateau/gat (14).jpg" alt="Gâteau marocain">
+            </a>
+            <span class="spec-caption">Grand plateau amande</span>
+
+        </div>
+
+        <div class="spec-item">
+            <a href="image/gateau/gat (15).jpg" class="glightbox" data-gallery="gateaux-marocains">
+                <img src="image/gateau/gat (15).jpg" alt="Gâteau marocain">
+            </a>
+            <span class="spec-caption">Gâteau amande warga</span>
+        </div>
+
+        <div class="spec-item">
+            <a href="image/gateau/gat (16).jpg" class="glightbox" data-gallery="gateaux-marocains">
+                <img src="image/gateau/gat (16).jpg" alt="Gâteau marocain">
+            </a>
+            <span class="spec-caption">Petit plateau sablé</span>
+
+        </div>
+
+        <div class="spec-item">
+            <a href="image/gateau/gat (17).png" class="glightbox" data-gallery="gateaux-marocains">
+                <img src="image/gateau/gat (17).png" alt="Gâteau marocain">
+            </a>
+            <span class="spec-caption">Gâteaux lotus</span>
+        </div>
+
+        <div class="spec-item">
+            <a href="image/gateau/gat (18).png" class="glightbox" data-gallery="gateaux-marocains">
+                <img src="image/gateau/gat (18).png" alt="Gâteau marocain">
+            </a>
+            <span class="spec-caption">Sablé amande effilé</span>
+
+        </div>
+
+        <div class="spec-item">
+            <a href="image/gateau/gat (19).png" class="glightbox" data-gallery="gateaux-marocains">
+                <img src="image/gateau/gat (19).png" alt="Gâteau marocain">
+            </a>
+            <span class="spec-caption">Cornet </span>
+        </div>
+
+        <div class="spec-item">
+            <a href="image/gateau/gat (19).png" class="glightbox" data-gallery="gateaux-marocains">
+                <img src="image/gateau/gat (20).jpg" alt="Gâteau marocain">
+            </a>
+            <span class="spec-caption">Amande caramilisé </span>
+        </div>
+
+
+    </div>
 </div>
 <div class="spec-card">
     <h3>🥐 Pâtisseries & Viennoiseries</h3>
-   <div class="spec-images">
 
-    <a href="image/venoiserie/1.png" class="glightbox" data-gallery="patisseries">
-        <img src="image/venoiserie/1.png" alt="Pâtisserie française">
-    </a>
+    <div class="spec-images">
 
-    <a href="image/venoiserie/venoi2.png" class="glightbox" data-gallery="patisseries">
-        <img src="image/venoiserie/venoi2.png" alt="Pâtisserie française">
-    </a>
+        <div class="spec-item">
+            <a href="image/venoiserie/venoi1.jpeg" class="glightbox" data-gallery="patisseries">
+                <img src="image/venoiserie/venoi1.jpeg" alt="New York Roll au chocolat">
+            </a>
+            <span class="spec-caption">New York Roll au chocolat</span>
+        </div>
 
-    <a href="image/venoiserie/image.jpeg" class="glightbox" data-gallery="patisseries">
-        <img src="image/venoiserie/image.jpeg" alt="Pâtisserie française">
-    </a>
+        <div class="spec-item">
+            <a href="image/venoiserie/buche.jpg" class="glightbox" data-gallery="patisseries">
+                <img src="image/venoiserie/buche.jpg" alt="Bûche de Noël">
+            </a>
+            <span class="spec-caption">Bûche de Noël</span>
+        </div>
 
-    <a href="image/venoiserie/5.png" class="glightbox" data-gallery="patisseries">
-        <img src="image/venoiserie/5.png" alt="Pâtisserie française">
-    </a>
+        <div class="spec-item">
+            <a href="image/venoiserie/1.png" class="glightbox" data-gallery="patisseries">
+                <img src="image/venoiserie/1.png" alt="Plateau Prestige">
+            </a>
+            <span class="spec-caption">Plateau Prestige</span>
+        </div>
 
+        <div class="spec-item">
+            <a href="image/venoiserie/venoi2.png" class="glightbox" data-gallery="patisseries">
+                <img src="image/venoiserie/venoi2.png" alt="Jalousie">
+            </a>
+            <span class="spec-caption">Jalousie</span>
+        </div>
 
-</div>
+        <div class="spec-item">
+            <a href="image/venoiserie/image.jpeg" class="glightbox" data-gallery="patisseries">
+                <img src="image/venoiserie/image.jpeg" alt="Bûche de Noël">
+            </a>
+            <span class="spec-caption">Bûche de Noël</span>
+        </div>
+
+        <div class="spec-item">
+            <a href="image/venoiserie/venoi3.png" class="glightbox" data-gallery="patisseries">
+                <img src="image/venoiserie/venoi3.png" alt="Croissant à la crème d'amande">
+            </a>
+            <span class="spec-caption">Croissant à la crème d'amande</span>
+        </div>
+
+        <div class="spec-item">
+            <a href="image/venoiserie/no.jpg" class="glightbox" data-gallery="patisseries">
+                <img src="image/venoiserie/no.jpg" alt="Sapin gourmand">
+            </a>
+            <span class="spec-caption">Sapin gourmand</span>
+        </div>
+
+    </div>
 </div>
 
       </div>
@@ -1045,22 +1262,33 @@ footer{background:#090909;color:rgba(250,250,246,.4);padding:40px 5% 28px;border
     <h3>Cuisine internationale</h3>
     <div class="spec-images">
 
-        <a href="image/img1.png" class="glightbox" data-gallery="cuisine">
+        <a href="image/img1.png" class="glightbox" data-gallery="cuisine-internationale">
             <img src="image/img1.png" alt="Cuisine internationale">
         </a>
 
-        <a href="image/img4.png" class="glightbox" data-gallery="cuisine">
+        <a href="image/img4.png" class="glightbox" data-gallery="cuisine-internationale">
             <img src="image/img4.png" alt="Cuisine internationale">
         </a>
 
-        <a href="image/img5.png" class="glightbox" data-gallery="cuisine">
+        <a href="image/img5.png" class="glightbox" data-gallery="cuisine-internationale">
             <img src="image/img5.png" alt="Cuisine internationale">
         </a>
 
-        <a href="image/img3.png" class="glightbox" data-gallery="cuisine">
+        <a href="image/img3.png" class="glightbox" data-gallery="cuisine-internationale">
             <img src="image/img3.png" alt="Cuisine internationale">
         </a>
-
+        <a href="image/img3.png" class="glightbox" data-gallery="cuisine-internationale">
+            <img src="image/plats/plats (1).jpg" alt="Cuisine internationale">
+        </a>
+        <a href="image/img3.png" class="glightbox" data-gallery="cuisine-internationale">
+            <img src="image/plats/plats (2).jpg" alt="Cuisine internationale">
+        </a>
+        <a href="image/img3.png" class="glightbox" data-gallery="cuisine-internationale">
+            <img src="image/plats/plats (3).jpg" alt="Cuisine internationale">
+        </a>
+        <a href="image/img3.png" class="glightbox" data-gallery="cuisine-internationale">
+            <img src="image/plats/plats (4).jpg" alt="Cuisine internationale">
+        </a>
     </div>
   </div>
 
@@ -1068,35 +1296,35 @@ footer{background:#090909;color:rgba(250,250,246,.4);padding:40px 5% 28px;border
     <h3>🎂 Créations sur mesure</h3>
     <div class="spec-images">
 
-        <a href="image/traiteur/1.png" class="glightbox" data-gallery="creations">
+        <a href="image/traiteur/1.png" class="glightbox" data-gallery="creations-sur-mesure">
             <img src="image/traiteur/1.png" alt="Création sur mesure">
         </a>
 
-        <a href="image/traiteur/t.png" class="glightbox" data-gallery="creations">
+        <a href="image/traiteur/t.png" class="glightbox" data-gallery="creations-sur-mesure">
             <img src="image/traiteur/t.png" alt="Création sur mesure">
         </a>
 
-        <a href="image/traiteur/n.png" class="glightbox" data-gallery="creations">
+        <a href="image/traiteur/n.png" class="glightbox" data-gallery="creations-sur-mesure">
             <img src="image/traiteur/n.png" alt="Création sur mesure">
         </a>
 
-        <a href="image/piece montee/b.JPG" class="glightbox" data-gallery="creations">
+        <a href="image/piece montee/b.JPG" class="glightbox" data-gallery="creations-sur-mesure">
             <img src="image/piece montee/b.JPG" alt="Création sur mesure">
         </a>
 
-        <a href="image/piece montee/C.JPG" class="glightbox" data-gallery="creations">
+        <a href="image/piece montee/C.JPG" class="glightbox" data-gallery="creations-sur-mesure">
             <img src="image/piece montee/C.JPG" alt="Création sur mesure">
         </a>
 
-        <a href="image/piece montee/g.JPG" class="glightbox" data-gallery="creations">
+        <a href="image/piece montee/g.JPG" class="glightbox" data-gallery="creations-sur-mesure">
             <img src="image/piece montee/g.JPG" alt="Création sur mesure">
         </a>
 
-        <a href="image/piece montee/I.JPG" class="glightbox" data-gallery="creations">
+        <a href="image/piece montee/I.JPG" class="glightbox" data-gallery="creations-sur-mesure">
             <img src="image/piece montee/I.JPG" alt="Création sur mesure">
         </a>
 
-        <a href="image/piece montee/E.JPG" class="glightbox" data-gallery="creations">
+        <a href="image/piece montee/E.JPG" class="glightbox" data-gallery="creations-sur-mesure">
             <img src="image/piece montee/E.JPG" alt="Création sur mesure">
         </a>
 
@@ -1104,6 +1332,7 @@ footer{background:#090909;color:rgba(250,250,246,.4);padding:40px 5% 28px;border
   </div>
   </div>
 </section>
+
 
 <!-- TRAITEUR -->
 <section id="traiteur" style="padding:0">
@@ -1238,93 +1467,83 @@ contactez-nous directement sur WhatsApp ou rendez-nous visite en magasin.
 </footer>
 
 <!-- Ton JavaScript -->
+
 <script>
-document.querySelectorAll('.rv').forEach((el) => {
-    el.classList.add('on');
-});
+document.addEventListener('DOMContentLoaded', () => {
 
-const hb = document.getElementById('HB');
-const nl = document.getElementById('NL');
-const mo = document.getElementById('MO');
-const mc = document.getElementById('MC');
-
-const closeMenu = () => {
-    if (!nl || !mo) return;
-
-    nl.classList.remove('open');
-    mo.classList.remove('open');
-};
-
-const openMenu = () => {
-    if (!nl || !mo) return;
-
-    nl.classList.add('open');
-    mo.classList.add('open');
-};
-
-
-// Bouton hamburger
-if (hb) {
-    hb.addEventListener('click', (e) => {
-        e.stopPropagation();
-
-        if (nl.classList.contains('open')) {
-            closeMenu();
-        } else {
-            openMenu();
-        }
-    });
-}
-
-
-// Cliquer en dehors du menu
-document.addEventListener('click', (e) => {
-
-    if (
-        nl &&
-        !nl.contains(e.target) &&
-        hb &&
-        !hb.contains(e.target)
-    ) {
-        closeMenu();
+    // 1. Navigation / Menu Hamburger (Sécurisé)
+    const navToggle = document.querySelector('.nav-toggle, .hamburger');
+    const navMenu = document.querySelector('.nav-menu, .nav-links');
+    
+    if (navToggle && navMenu) {
+        navToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
     }
 
-});
+    // 2. Filtres du Menu Traiteur / Carte (Sécurisé)
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const menuItems = document.querySelectorAll('.menu-item');
 
+    if (filterBtns.length > 0 && menuItems.length > 0) {
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
 
-// Bouton fermer X
-if (mc) {
-    mc.addEventListener('click', () => {
-        closeMenu();
-    });
-}
+                const filterValue = btn.getAttribute('data-filter');
 
+                menuItems.forEach(item => {
+                    const category = item.getAttribute('data-category');
+                    if (filterValue === 'all' || category === filterValue) {
+                        item.style.display = '';
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+            });
+        });
+    }
 
-// Cliquer sur le fond noir
-if (mo) {
-    mo.addEventListener('click', () => {
-        closeMenu();
-    });
-}
+    // 3. Lightbox / Galerie (Correction spécifique pour éviter les crashs sur null)
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+    const lightboxClose = document.getElementById('lightbox-close');
+    const triggers = document.querySelectorAll('.lightbox-trigger, .gallery-item img');
 
-
-// Scroll = fermer menu
-window.addEventListener('scroll', () => {
-    closeMenu();
-}, { passive: true });
-
-
-// Cliquer sur un lien = fermer menu
-if (nl) {
-    nl.querySelectorAll('a').forEach((a) => {
-
-        a.addEventListener('click', () => {
-            closeMenu();
+    if (lightbox && lightboxImg) {
+        triggers.forEach(img => {
+            img.addEventListener('click', () => {
+                lightboxImg.src = img.src;
+                lightbox.classList.add('active');
+            });
         });
 
-    });
-}
-</script>
+        if (lightboxClose) {
+            lightboxClose.addEventListener('click', () => {
+                lightbox.classList.remove('active');
+            });
+        }
 
-</body>
-</html>
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox) {
+                lightbox.classList.remove('active');
+            }
+        });
+    }
+
+    // 4. Sécurisation globale pour tout autre composant (Header/Footer/Galerie)
+    const safeQuery = (selector, callback) => {
+        const el = document.querySelector(selector);
+        if (el) callback(el);
+    };
+
+    // Exemple d'utilisation sécurisée sur un élément secondaire
+    safeQuery('.btn-special', (btn) => {
+        btn.addEventListener('click', () => {
+            console.log('Action exécutée en toute sécurité');
+        });
+    });
+
+});
+</script>
