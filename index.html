@@ -79,8 +79,12 @@ section{padding:88px 5%}
     opacity: 1 !important;
     transform: none !important;
     transition: opacity .7s ease, transform .7s ease;
-}.rv.on{opacity:1;transform:none}
+}
 
+.rv.on {
+    opacity: 1;
+    transform: none;
+}
 /* ABOUT */
 #apropos {
   background: var(--w);
@@ -903,7 +907,13 @@ footer{background:#090909;color:rgba(250,250,246,.4);padding:40px 5% 28px;border
 
 .photo-prev { left: 20px; }
 .photo-next { right: 20px; } 
+.photo-modal {
+    display: none;
+}
 
+.photo-modal.active {
+    display: flex;
+}
 </style>
 
 </head>
@@ -957,7 +967,7 @@ footer{background:#090909;color:rgba(250,250,246,.4);padding:40px 5% 28px;border
   </div>
   <div class="hscr"><span>Découvrir</span><div class="hscrl"></div></div>
 </section>
-
+<section id="apropos">
 <!-- STATS -->
 <div class="stats">
   <div class="st"><span class="stn">7</span><span class="stl">Types de cuisine</span></div>
@@ -1465,7 +1475,17 @@ contactez-nous directement sur WhatsApp ou rendez-nous visite en magasin.
   <br>
   
 </footer>
+<div id="photoModal" class="photo-modal">
 
+    <button id="photoClose" class="photo-close" type="button">✕</button>
+
+    <button id="photoPrev" class="photo-prev" type="button">←</button>
+
+    <img id="photoModalImg" src="" alt="">
+
+    <button id="photoNext" class="photo-next" type="button">→</button>
+
+</div>
 <!-- Ton JavaScript -->
 
 <script>
@@ -1544,6 +1564,163 @@ document.addEventListener('DOMContentLoaded', () => {
             console.log('Action exécutée en toute sécurité');
         });
     });
+    // 5. Galerie des spécialités avec X + flèches
 
+    const photoModal = document.getElementById('photoModal');
+    const photoModalImg = document.getElementById('photoModalImg');
+    const photoClose = document.getElementById('photoClose');
+    const photoPrev = document.getElementById('photoPrev');
+    const photoNext = document.getElementById('photoNext');
+
+    const specialiteLinks = document.querySelectorAll(
+        '#specialite a.glightbox'
+    );
+
+    let currentGallery = [];
+    let currentIndex = 0;
+
+    if (
+        photoModal &&
+        photoModalImg &&
+        photoClose &&
+        photoPrev &&
+        photoNext &&
+        specialiteLinks.length > 0
+    ) {
+
+        function showSpecialiteImage() {
+
+            const currentLink = currentGallery[currentIndex];
+
+            if (!currentLink) return;
+
+            photoModalImg.src = currentLink.getAttribute('href');
+
+            // Pas de flèche gauche sur la première
+            if (currentIndex === 0) {
+                photoPrev.style.display = 'none';
+            } else {
+                photoPrev.style.display = 'flex';
+            }
+
+            // Pas de flèche droite sur la dernière
+            if (currentIndex === currentGallery.length - 1) {
+                photoNext.style.display = 'none';
+            } else {
+                photoNext.style.display = 'flex';
+            }
+        }
+
+
+        specialiteLinks.forEach(link => {
+
+            link.addEventListener('click', function(e) {
+
+                e.preventDefault();
+
+                const galleryName = link.getAttribute('data-gallery');
+
+                // Garder uniquement les photos de la même catégorie
+                currentGallery = Array.from(specialiteLinks).filter(item => {
+                    return item.getAttribute('data-gallery') === galleryName;
+                });
+
+                currentIndex = currentGallery.indexOf(link);
+
+                if (currentIndex < 0) {
+                    currentIndex = 0;
+                }
+
+                showSpecialiteImage();
+
+                photoModal.classList.add('active');
+
+                document.body.style.overflow = 'hidden';
+            });
+
+        });
+
+
+        // Photo suivante
+        photoNext.addEventListener('click', function(e) {
+
+            e.preventDefault();
+            e.stopPropagation();
+
+            if (currentIndex < currentGallery.length - 1) {
+                currentIndex++;
+                showSpecialiteImage();
+            }
+
+        });
+
+
+        // Photo précédente
+        photoPrev.addEventListener('click', function(e) {
+
+            e.preventDefault();
+            e.stopPropagation();
+
+            if (currentIndex > 0) {
+                currentIndex--;
+                showSpecialiteImage();
+            }
+
+        });
+
+
+        // Fermer avec X
+        photoClose.addEventListener('click', function(e) {
+
+            e.preventDefault();
+            e.stopPropagation();
+
+            photoModal.classList.remove('active');
+
+            photoModalImg.src = '';
+
+            document.body.style.overflow = '';
+        });
+
+
+        // Cliquer sur le fond pour fermer
+        photoModal.addEventListener('click', function(e) {
+
+            if (e.target === photoModal) {
+
+                photoModal.classList.remove('active');
+
+                photoModalImg.src = '';
+
+                document.body.style.overflow = '';
+            }
+
+        });
+
+
+        // Clavier
+        document.addEventListener('keydown', function(e) {
+
+            if (!photoModal.classList.contains('active')) {
+                return;
+            }
+
+            if (e.key === 'Escape') {
+                photoClose.click();
+            }
+
+            if (e.key === 'ArrowRight') {
+                photoNext.click();
+            }
+
+            if (e.key === 'ArrowLeft') {
+                photoPrev.click();
+            }
+
+        });
+
+    }
 });
 </script>
+</body>
+</html>
