@@ -1626,93 +1626,341 @@ contactez-nous directement sur WhatsApp ou rendez-nous visite en magasin.
 <script>
 document.addEventListener('DOMContentLoaded', () => {
 
-    // 1. Navigation / Menu Hamburger (Sécurisé)
-    const navToggle = document.querySelector('.nav-toggle, .hamburger');
-    const navMenu = document.querySelector('.nav-menu, .nav-links');
-    
+    /* =========================================================
+       1. MENU HAMBURGER MOBILE
+       ========================================================= */
+
+    const navToggle = document.getElementById('HB');
+    const navMenu = document.getElementById('NL');
+    const navOverlay = document.getElementById('MO');
+    const navClose = document.getElementById('MC');
+
+    function closeMobileMenu() {
+        if (navMenu) {
+            navMenu.classList.remove('open');
+        }
+
+        if (navOverlay) {
+            navOverlay.classList.remove('open');
+        }
+    }
+
     if (navToggle && navMenu) {
+
+        // Ouvrir / fermer avec le hamburger
         navToggle.addEventListener('click', () => {
-            navMenu.classList.toggle('active');
-        });
-    }
 
-    // 2. Filtres du Menu Traiteur / Carte (Sécurisé)
-    const filterBtns = document.querySelectorAll('.filter-btn');
-    const menuItems = document.querySelectorAll('.menu-item');
+            navMenu.classList.toggle('open');
 
-    if (filterBtns.length > 0 && menuItems.length > 0) {
-        filterBtns.forEach(btn => {
-            btn.addEventListener('click', () => {
-                filterBtns.forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
+            if (navOverlay) {
+                navOverlay.classList.toggle('open');
+            }
 
-                const filterValue = btn.getAttribute('data-filter');
-
-                menuItems.forEach(item => {
-                    const category = item.getAttribute('data-category');
-                    if (filterValue === 'all' || category === filterValue) {
-                        item.style.display = '';
-                    } else {
-                        item.style.display = 'none';
-                    }
-                });
-            });
-        });
-    }
-
-    // 3. Lightbox / Galerie (Correction spécifique pour éviter les crashs sur null)
-    const lightbox = document.getElementById('lightbox');
-    const lightboxImg = document.getElementById('lightbox-img');
-    const lightboxClose = document.getElementById('lightbox-close');
-    const triggers = document.querySelectorAll('.lightbox-trigger, .gallery-item img');
-
-    if (lightbox && lightboxImg) {
-        triggers.forEach(img => {
-            img.addEventListener('click', () => {
-                lightboxImg.src = img.src;
-                lightbox.classList.add('active');
-            });
         });
 
-        if (lightboxClose) {
-            lightboxClose.addEventListener('click', () => {
-                lightbox.classList.remove('active');
+        // Fermer avec le X
+        if (navClose) {
+            navClose.addEventListener('click', () => {
+                closeMobileMenu();
             });
         }
 
-        lightbox.addEventListener('click', (e) => {
-            if (e.target === lightbox) {
-                lightbox.classList.remove('active');
+        // Fermer en cliquant sur l'overlay
+        if (navOverlay) {
+            navOverlay.addEventListener('click', () => {
+                closeMobileMenu();
+            });
+        }
+
+        // Fermer après avoir cliqué sur un lien
+        navMenu.querySelectorAll('a').forEach(link => {
+
+            link.addEventListener('click', () => {
+                closeMobileMenu();
+            });
+
+        });
+
+        // Fermer automatiquement quand on scrolle
+        window.addEventListener('scroll', () => {
+            if (navMenu.classList.contains('open')) {
+                closeMobileMenu();
             }
         });
     }
 
-    // 4. Sécurisation globale pour tout autre composant (Header/Footer/Galerie)
+
+    /* =========================================================
+       2. FILTRES DU MENU TRAITEUR / CARTE
+       ========================================================= */
+
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const menuItems = document.querySelectorAll('.menu-item');
+
+    if (filterBtns.length > 0 && menuItems.length > 0) {
+
+        filterBtns.forEach(btn => {
+
+            btn.addEventListener('click', () => {
+
+                // Bouton actif
+                filterBtns.forEach(b => {
+                    b.classList.remove('active');
+                });
+
+                btn.classList.add('active');
+
+                // Catégorie sélectionnée
+                const filterValue = btn.getAttribute('data-filter');
+
+                // Afficher / cacher les plats
+                menuItems.forEach(item => {
+
+                    const category =
+                        item.getAttribute('data-category');
+
+                    if (
+                        filterValue === 'all' ||
+                        category === filterValue
+                    ) {
+                        item.style.display = '';
+                    } else {
+                        item.style.display = 'none';
+                    }
+
+                });
+
+            });
+
+        });
+
+    }
+
+
+    /* =========================================================
+       3. LIGHTBOX / GALERIE
+       ========================================================= */
+
+    const lightbox =
+        document.getElementById('lightbox');
+
+    const lightboxImg =
+        document.getElementById('lightbox-img');
+
+    const lightboxClose =
+        document.getElementById('lightbox-close');
+
+    const triggers =
+        document.querySelectorAll(
+            '.lightbox-trigger, .gallery-item img'
+        );
+
+
+    if (lightbox && lightboxImg) {
+
+        triggers.forEach(img => {
+
+            img.addEventListener('click', () => {
+
+                lightboxImg.src = img.src;
+
+                lightbox.classList.add('active');
+
+            });
+
+        });
+
+
+        // Fermer avec le bouton X
+        if (lightboxClose) {
+
+            lightboxClose.addEventListener('click', () => {
+
+                lightbox.classList.remove('active');
+
+            });
+
+        }
+
+
+        // Fermer en cliquant sur le fond
+        lightbox.addEventListener('click', (e) => {
+
+            if (e.target === lightbox) {
+
+                lightbox.classList.remove('active');
+
+            }
+
+        });
+
+    }
+
+
+    /* =========================================================
+       4. SÉCURISATION DES AUTRES COMPOSANTS
+       ========================================================= */
+
     const safeQuery = (selector, callback) => {
+
         const el = document.querySelector(selector);
-        if (el) callback(el);
+
+        if (el) {
+            callback(el);
+        }
+
     };
 
-    // Exemple d'utilisation sécurisée sur un élément secondaire
+
     safeQuery('.btn-special', (btn) => {
+
         btn.addEventListener('click', () => {
-            console.log('Action exécutée en toute sécurité');
+
+            console.log(
+                'Action exécutée en toute sécurité'
+            );
+
         });
+
     });
-    // 5. Galerie des spécialités avec X + flèches
 
-    const photoModal = document.getElementById('photoModal');
-    const photoModalImg = document.getElementById('photoModalImg');
-    const photoClose = document.getElementById('photoClose');
-    const photoPrev = document.getElementById('photoPrev');
-    const photoNext = document.getElementById('photoNext');
 
-   const specialiteLinks = document.querySelectorAll(
-    '.spec-images a.glightbox'
-);
+    /* =========================================================
+       5. GALERIE DES SPÉCIALITÉS
+       X + FLÈCHES + CLAVIER
+       ========================================================= */
+
+    const photoModal =
+        document.getElementById('photoModal');
+
+    const photoModalImg =
+        document.getElementById('photoModalImg');
+
+    const photoClose =
+        document.getElementById('photoClose');
+
+    const photoPrev =
+        document.getElementById('photoPrev');
+
+    const photoNext =
+        document.getElementById('photoNext');
+
+
+    const specialiteLinks =
+        document.querySelectorAll(
+            '.spec-images a.glightbox'
+        );
+
 
     let currentGallery = [];
     let currentIndex = 0;
+
+
+    /* =========================================================
+       AFFICHER L'IMAGE ACTUELLE
+       ========================================================= */
+
+    function showSpecialiteImage() {
+
+        const currentLink =
+            currentGallery[currentIndex];
+
+
+        if (!currentLink) {
+            return;
+        }
+
+
+        // Image
+        photoModalImg.src =
+            currentLink.getAttribute('href');
+
+
+        /* ===== TITRE ===== */
+
+        const photoModalTitle =
+            document.getElementById(
+                'photoModalTitle'
+            );
+
+
+        if (photoModalTitle) {
+
+            // Gâteaux marocains / Pâtisseries
+            const caption =
+                currentLink
+                    .closest('.spec-item')
+                    ?.querySelector('.spec-caption');
+
+
+            if (caption) {
+
+                photoModalTitle.textContent =
+                    caption.textContent.trim();
+
+            } else {
+
+                // Douceurs Fines /
+                // Cuisine internationale /
+                // Créations sur mesure
+
+                const card =
+                    currentLink.closest('.spec-card');
+
+                const title =
+                    card?.querySelector('h3');
+
+
+                if (title) {
+
+                    photoModalTitle.textContent =
+                        title.textContent.trim();
+
+                } else {
+
+                    photoModalTitle.textContent = '';
+
+                }
+
+            }
+
+        }
+
+
+        /* ===== FLÈCHE GAUCHE ===== */
+
+        if (currentIndex === 0) {
+
+            photoPrev.style.display = 'none';
+
+        } else {
+
+            photoPrev.style.display = 'flex';
+
+        }
+
+
+        /* ===== FLÈCHE DROITE ===== */
+
+        if (
+            currentIndex ===
+            currentGallery.length - 1
+        ) {
+
+            photoNext.style.display = 'none';
+
+        } else {
+
+            photoNext.style.display = 'flex';
+
+        }
+
+    }
+
+
+    /* =========================================================
+       INITIALISATION GALERIE
+       ========================================================= */
 
     if (
         photoModal &&
@@ -1723,179 +1971,223 @@ document.addEventListener('DOMContentLoaded', () => {
         specialiteLinks.length > 0
     ) {
 
-function showSpecialiteImage() {
 
-    const currentLink = currentGallery[currentIndex];
-
-    if (!currentLink) return;
-
-    photoModalImg.src = currentLink.getAttribute('href');
-
-    /* ===== TITRE ===== */
-
-    const photoModalTitle =
-        document.getElementById('photoModalTitle');
-
-    if (photoModalTitle) {
-
-        // Gâteaux marocains / Pâtisseries
-        const caption =
-            currentLink
-                .closest('.spec-item')
-                ?.querySelector('.spec-caption');
-
-        if (caption) {
-
-            photoModalTitle.textContent =
-                caption.textContent.trim();
-
-        } else {
-
-            // Douceurs Fines / Cuisine internationale /
-            // Créations sur mesure
-            const card =
-                currentLink.closest('.spec-card');
-
-            const title =
-                card?.querySelector('h3');
-
-            if (title) {
-                photoModalTitle.textContent =
-                    title.textContent.trim();
-            } else {
-                photoModalTitle.textContent = '';
-            }
-        }
-    }
-
-
-    /* ===== FLÈCHE GAUCHE ===== */
-
-    if (currentIndex === 0) {
-        photoPrev.style.display = 'none';
-    } else {
-        photoPrev.style.display = 'flex';
-    }
-
-
-    /* ===== FLÈCHE DROITE ===== */
-
-    if (currentIndex === currentGallery.length - 1) {
-        photoNext.style.display = 'none';
-    } else {
-        photoNext.style.display = 'flex';
-    }
-}
-
+        /* ===== CLIQUER SUR UNE PHOTO ===== */
 
         specialiteLinks.forEach(link => {
 
-            link.addEventListener('click', function(e) {
+            link.addEventListener(
+                'click',
+                function(e) {
+
+                    e.preventDefault();
+
+
+                    const galleryName =
+                        link.getAttribute(
+                            'data-gallery'
+                        );
+
+
+                    // Garder uniquement les photos
+                    // de la même catégorie
+                    currentGallery =
+                        Array.from(
+                            specialiteLinks
+                        ).filter(item => {
+
+                            return (
+                                item.getAttribute(
+                                    'data-gallery'
+                                ) === galleryName
+                            );
+
+                        });
+
+
+                    currentIndex =
+                        currentGallery.indexOf(
+                            link
+                        );
+
+
+                    if (currentIndex < 0) {
+
+                        currentIndex = 0;
+
+                    }
+
+
+                    showSpecialiteImage();
+
+
+                    photoModal.classList.add(
+                        'active'
+                    );
+
+
+                    document.body.style.overflow =
+                        'hidden';
+
+                }
+            );
+
+        });
+
+
+        /* =====================================================
+           PHOTO SUIVANTE
+           ===================================================== */
+
+        photoNext.addEventListener(
+            'click',
+            function(e) {
 
                 e.preventDefault();
 
-                const galleryName = link.getAttribute('data-gallery');
+                e.stopPropagation();
 
-                // Garder uniquement les photos de la même catégorie
-                currentGallery = Array.from(specialiteLinks).filter(item => {
-                    return item.getAttribute('data-gallery') === galleryName;
-                });
 
-                currentIndex = currentGallery.indexOf(link);
+                if (
+                    currentIndex <
+                    currentGallery.length - 1
+                ) {
 
-                if (currentIndex < 0) {
-                    currentIndex = 0;
+                    currentIndex++;
+
+                    showSpecialiteImage();
+
                 }
 
-                showSpecialiteImage();
-
-                photoModal.classList.add('active');
-
-                document.body.style.overflow = 'hidden';
-            });
-
-        });
-
-
-        // Photo suivante
-        photoNext.addEventListener('click', function(e) {
-
-            e.preventDefault();
-            e.stopPropagation();
-
-            if (currentIndex < currentGallery.length - 1) {
-                currentIndex++;
-                showSpecialiteImage();
             }
+        );
 
-        });
+
+        /* =====================================================
+           PHOTO PRÉCÉDENTE
+           ===================================================== */
+
+        photoPrev.addEventListener(
+            'click',
+            function(e) {
+
+                e.preventDefault();
+
+                e.stopPropagation();
 
 
-        // Photo précédente
-        photoPrev.addEventListener('click', function(e) {
+                if (currentIndex > 0) {
 
-            e.preventDefault();
-            e.stopPropagation();
+                    currentIndex--;
 
-            if (currentIndex > 0) {
-                currentIndex--;
-                showSpecialiteImage();
+                    showSpecialiteImage();
+
+                }
+
             }
-
-        });
-
-
-        // Fermer avec X
-        photoClose.addEventListener('click', function(e) {
-
-            e.preventDefault();
-            e.stopPropagation();
-
-            photoModal.classList.remove('active');
-
-            photoModalImg.src = '';
-
-            document.body.style.overflow = '';
-        });
+        );
 
 
-        // Cliquer sur le fond pour fermer
-        photoModal.addEventListener('click', function(e) {
+        /* =====================================================
+           FERMER AVEC X
+           ===================================================== */
 
-            if (e.target === photoModal) {
+        photoClose.addEventListener(
+            'click',
+            function(e) {
 
-                photoModal.classList.remove('active');
+                e.preventDefault();
+
+                e.stopPropagation();
+
+
+                photoModal.classList.remove(
+                    'active'
+                );
+
 
                 photoModalImg.src = '';
 
-                document.body.style.overflow = '';
+
+                document.body.style.overflow =
+                    '';
+
             }
+        );
 
-        });
+
+        /* =====================================================
+           FERMER EN CLIQUANT SUR LE FOND
+           ===================================================== */
+
+        photoModal.addEventListener(
+            'click',
+            function(e) {
+
+                if (e.target === photoModal) {
+
+                    photoModal.classList.remove(
+                        'active'
+                    );
 
 
-        // Clavier
-        document.addEventListener('keydown', function(e) {
+                    photoModalImg.src = '';
 
-            if (!photoModal.classList.contains('active')) {
-                return;
+
+                    document.body.style.overflow =
+                        '';
+
+                }
+
             }
+        );
 
-            if (e.key === 'Escape') {
-                photoClose.click();
+
+        /* =====================================================
+           CLAVIER
+           ===================================================== */
+
+        document.addEventListener(
+            'keydown',
+            function(e) {
+
+                if (
+                    !photoModal.classList.contains(
+                        'active'
+                    )
+                ) {
+                    return;
+                }
+
+
+                // Échap
+                if (e.key === 'Escape') {
+
+                    photoClose.click();
+
+                }
+
+
+                // Flèche droite
+                if (e.key === 'ArrowRight') {
+
+                    photoNext.click();
+
+                }
+
+
+                // Flèche gauche
+                if (e.key === 'ArrowLeft') {
+
+                    photoPrev.click();
+
+                }
+
             }
-
-            if (e.key === 'ArrowRight') {
-                photoNext.click();
-            }
-
-            if (e.key === 'ArrowLeft') {
-                photoPrev.click();
-            }
-
-        });
+        );
 
     }
+
 });
 </script>
 </body>
