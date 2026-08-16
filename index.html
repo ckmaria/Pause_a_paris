@@ -921,6 +921,133 @@ footer{background:#090909;color:rgba(250,250,246,.4);padding:40px 5% 28px;border
     font-weight: 600;
     margin-top: 15px;
 }
+/* =====================================================
+   CORRECTION GALERIE MOBILE
+   Images parfaitement centrées et alignées
+   ===================================================== */
+
+.photo-modal {
+    padding: 70px 20px 50px;
+    overflow: hidden;
+}
+
+.photo-modal-content {
+    width: min(88vw, 900px);
+    height: min(72vh, 700px);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    position: relative;
+}
+
+.photo-modal-content img {
+    display: block;
+
+    width: 100%;
+    height: 100%;
+
+    max-width: none;
+    max-height: none;
+
+    object-fit: contain;
+    object-position: center;
+
+    border-radius: 0;
+}
+
+.photo-modal-title {
+    position: absolute;
+    top: calc(100% + 12px);
+    left: 0;
+    width: 100%;
+
+    margin: 0;
+
+    color: #fff;
+    text-align: center;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+/* Flèches toujours au même endroit */
+.photo-prev,
+.photo-next {
+    top: 50%;
+    transform: translateY(-50%);
+
+    width: 44px;
+    height: 44px;
+
+    z-index: 10002;
+}
+
+.photo-prev {
+    left: 16px;
+}
+
+.photo-next {
+    right: 16px;
+}
+
+/* Bouton X */
+.photo-close {
+    top: 16px;
+    right: 16px;
+}
+
+
+/* =========================
+   TÉLÉPHONE
+   ========================= */
+
+@media (max-width: 600px) {
+
+    .photo-modal {
+        padding: 60px 12px 60px;
+    }
+
+    .photo-modal-content {
+        width: 88vw;
+        height: 62vh;
+    }
+
+    .photo-modal-content img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+    }
+
+    .photo-modal-title {
+        font-size: 17px;
+        top: calc(100% + 10px);
+    }
+
+    .photo-prev,
+    .photo-next {
+        width: 40px;
+        height: 40px;
+        font-size: 18px;
+    }
+
+    .photo-prev {
+        left: 10px;
+    }
+
+    .photo-next {
+        right: 10px;
+    }
+
+    .photo-close {
+        top: 12px;
+        right: 12px;
+        width: 40px;
+        height: 40px;
+        font-size: 20px;
+    }
+}
 </style>
 
 </head>
@@ -1492,11 +1619,8 @@ contactez-nous directement sur WhatsApp ou rendez-nous visite en magasin.
     </div>
 
     <button id="photoNext" class="photo-next" type="button">→</button>
-
 </div>
-    <button id="photoNext" class="photo-next" type="button">→</button>
 
-</div>
 <!-- Ton JavaScript -->
 
 <script>
