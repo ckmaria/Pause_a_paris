@@ -124,7 +124,7 @@ section{padding:88px 5%}
 /* BLOC VERT (APB) ACCROCHÉ PROPREMENT EN BAS */
 .apb {
   background: var(--vf, #2d402b);
-  color: var(--w, #ffffff);
+  color: var(--w,#282525);
   padding: 22px 24px;
   border-radius: 8px;
   border: 1px solid rgba(201, 164, 74, .28);
@@ -142,6 +142,7 @@ section{padding:88px 5%}
   margin-bottom: 6px;
 }
 
+
 .apb h3 {
   font-family: 'Playfair Display', serif;
   font-size: 1.25rem;
@@ -153,7 +154,7 @@ section{padding:88px 5%}
   font-family: 'DM Sans', sans-serif;
   font-size: 0.85rem;
   line-height: 1.6;
-  color: rgba(255, 255, 255, 0.88);
+  color:#43523A!important;
   margin: 0;
 }
 
@@ -843,7 +844,9 @@ footer{background:#090909;color:rgba(250,250,246,.4);padding:40px 5% 28px;border
     position: fixed;
     z-index: 9999;
     inset: 0;
-    background: rgba(0, 0, 0, 0.95);
+    background:rgba(223,233,195,.88);
+    backdrop-filter:blur(14px);
+    -webkit-backdrop-filter:blur(14px);
     align-items: center;
     justify-content: center;
 }
@@ -1283,15 +1286,7 @@ nav#nav .hb {display:none!important}
   text-transform:uppercase!important;
 }
 #specialite .sec-title .line {display:none!important}
-#specialite .sec-title::after {
-  content:"Petit-déjeuner   ·   Brunch   ·   Plats   ·   Desserts   ·   Boissons   ·   Voir tout";
-  display:block;
-  margin-top:28px;
-  font-family:"Cormorant Garamond",Georgia,serif;
-  color:var(--pp-ink);
-  font-size:1.34rem;
-  white-space:pre-wrap;
-}
+
 
 h1,h2,h3,.sh,.fbn {
   font-family:"Cormorant Garamond",Georgia,serif!important;
@@ -1518,7 +1513,7 @@ footer a,.fbn,.fcp {color:var(--pp-ink)!important}
   }
 
   .center-brand-main{
-    font-size:2.2rem!important;
+    font-size:2rem!important;
   }
 
   .nav-right{
@@ -1526,7 +1521,11 @@ footer a,.fbn,.fcp {color:var(--pp-ink)!important}
     justify-self:end!important;
   }
 }
-
+@media (max-width:1050px){
+  nav#nav .center-brand .center-brand-main{
+    font-size:1.85rem!important;
+  }
+}
 /* ===== PHOTO : garder son ratio naturel, sans étirement ===== */
 #hero{
   height:auto!important;
@@ -2744,10 +2743,10 @@ nav#nav .logo img:hover{
   }
   nav#nav .hb span{display:none!important;}
   nav#nav .hb::after{
-    content:"Menu";
+    content:"☰"!important;
     font-family:"Cormorant Garamond",Georgia,serif;
     font-size:1.55rem;
-    color:#2f2b27!important;
+    color:#43523A!important;
     letter-spacing:.01em;
   }
 
@@ -2865,7 +2864,7 @@ nav#nav .logo img:hover{
   nav#nav .hb{display:flex!important;position:relative!important;z-index:5002!important;cursor:pointer!important;}
   nav#nav .hb span{display:none!important;}
 nav#nav .hb::after{
-  content:"Menu"!important;
+  content:"☰"!important;
   font-family:"Cormorant Garamond",Georgia,serif!important;
   font-size:1.35rem!important;
   color:#2f2b27!important;
@@ -3159,7 +3158,7 @@ nav#nav .hb::after{
 
   nav#nav .center-brand-main{
     font-family:"Cormorant Garamond", Georgia, serif!important;
-    font-size:2.65rem!important;
+    font-size:2.25rem!important;
     font-weight:300!important;
     line-height:1!important;
     letter-spacing:.04em!important;
@@ -3175,7 +3174,7 @@ nav#nav .hb::after{
   }
 
   nav#nav .hb::after{
-    content:"Menu"!important;
+    content:"☰"!important;
     font-family:"Cormorant Garamond", Georgia, serif!important;
     font-size:1.55rem!important;
     font-weight:500!important;
@@ -3192,6 +3191,7 @@ nav#nav .center-brand-main{
   color:#43523A!important;
   text-transform:none!important;
 }
+
 
 </style>
 
@@ -3247,7 +3247,7 @@ nav#nav .center-brand-main{
 <div id="PPMobileMenu" class="pp-mobile-drawer" aria-hidden="true">
   <div class="pp-mobile-drawer-head">
     <button type="button" id="PPMobileClose" class="pp-mobile-drawer-close">Fermer</button>
-    <span class="pp-mobile-drawer-brand">PAUSE À PARIS</span>
+    <span class="pp-mobile-drawer-brand">Pause à Paris</span>
   </div>
   <nav class="pp-mobile-drawer-nav" aria-label="Navigation mobile">
     <a href="#apropos">À propos</a>
